@@ -30,12 +30,12 @@ filter { "files:**.asm", "system:macosx", "architecture:x86_64" }
 
 filter { "files:**.asm", "system:linux", "architecture:x86" }
 	buildmessage "%{file.name}"
-	buildcommands "yasm -f elf32 --prefix=_ %{file.relpath} -o %{cfg.objdir}/%{file.basename}.o"
+	buildcommands "yasm -f elf32 %{file.relpath} -o %{cfg.objdir}/%{file.basename}.o"
 	buildoutputs "%{cfg.objdir}/%{file.basename}.o"
 
 filter { "files:**.asm", "system:linux", "architecture:x86_64" }
 	buildmessage "%{file.name}"
-	buildcommands "yasm -f elf64 --prefix=_ %{file.relpath} -o %{cfg.objdir}/%{file.basename}.o"
+	buildcommands "yasm -f elf64 %{file.relpath} -o %{cfg.objdir}/%{file.basename}.o"
 	buildoutputs "%{cfg.objdir}/%{file.basename}.o"
 
 filter {}
