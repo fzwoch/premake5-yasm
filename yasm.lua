@@ -10,7 +10,7 @@ filter { "files:**.asm", "system:windows", "architecture:x86", "action:vs*" }
 
 filter { "files:**.asm", "system:windows", "architecture:x86_64" }
 	buildmessage "%{file.name}"
-	buildcommands "yasm -f win64 --prefix=_ %{file.relpath} -o %{cfg.objdir}/%{file.basename}.o"
+	buildcommands "yasm -f win64 %{file.relpath} -o %{cfg.objdir}/%{file.basename}.o"
 	buildoutputs "%{cfg.objdir}/%{file.basename}.o"
 
 filter { "files:**.asm", "system:windows", "architecture:x86_64", "action:vs*" }
