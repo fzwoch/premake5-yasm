@@ -12,10 +12,12 @@ matrix:
       env: TARGET_ARCH=32
     - os: linux
       dist: trusty
-      env: TARGET_OS=mingw CC=x86_64-w64-mingw32-gcc
+      compiler: x86_64-w64-mingw32-gcc
+      env: TARGET_OS=mingw
     - os: linux
       dist: trusty
-      env: TARGET_OS=mingw TARGET_ARCH=32 CC=i686-w64-mingw32-gcc
+      compiler: i686-w64-mingw32-gcc
+      env: TARGET_OS=mingw TARGET_ARCH=32
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get -qq update; fi
@@ -32,3 +34,6 @@ before_script:
 
 script:
   - if [[ "$TARGET_ARCH" == "32" ]]; then make config=release32; else make config=release64; fi
+
+after_success:
+  - if [[ "$TARGET_ARCH" == "32" ]]; then file bin/release32/yasm; else file bin/release64/yasm; fi
