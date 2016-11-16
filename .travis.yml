@@ -34,6 +34,3 @@ before_script:
 
 script:
   - if [[ "$TARGET_ARCH" == "32" ]]; then make config=release32; else make config=release64; fi
-
-after_success:
-  - if [[ "$TARGET_ARCH" == "32" ]]; then file bin/release32/yasm; else file bin/release64/yasm; fi

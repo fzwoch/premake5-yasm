@@ -23,3 +23,6 @@ workspace "yasm"
 		files "main.c"
 		files "yasm.asm"
 		include "yasm.lua"
+
+		filter "action:gmake"
+			postbuildcommands { "file %{cfg.buildtarget.abspath}" }
