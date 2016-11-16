@@ -12,10 +12,10 @@ matrix:
       env: TARGET_ARCH=32
     - os: linux
       dist: trusty
-      env: TARGET_OS=mingw
+      env: TARGET_OS=mingw CC=x86_64-w64-mingw32-gcc
     - os: linux
       dist: trusty
-      env: TARGET_OS=mingw TARGET_ARCH=32
+      env: TARGET_OS=mingw TARGET_ARCH=32 CC=i686-w64-mingw32-gcc
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get -qq update; fi
