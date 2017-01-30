@@ -17,12 +17,47 @@ workspace "yasm"
 	filter "configurations:*32"
 		architecture "x86"
 
-	project "yasm"
+	include "yasm.lua"
+
+	project "yasmapp"
 		kind "consoleapp"
 		language "c"
 		files "main.c"
 		files "yasm.asm"
-		include "yasm.lua"
+
+		filter "action:gmake"
+			postbuildcommands { "file %{cfg.buildtarget.abspath}" }
+
+	project "yasmshared"
+		kind "sharedlib"
+		language "c"
+		files "yasm.asm"
+
+		filter "action:gmake"
+			postbuildcommands { "file %{cfg.buildtarget.abspath}" }
+
+	project "yasmsharedapp"
+		kind "consoleapp"
+		language "c"
+		files "main.c"
+		links "yasmshared"
+
+		filter "action:gmake"
+			postbuildcommands { "file %{cfg.buildtarget.abspath}" }
+
+	project "yasmstatic"
+		kind "staticlib"
+		language "c"
+		files "yasm.asm"
+
+		filter "action:gmake"
+			postbuildcommands { "file %{cfg.buildtarget.abspath}" }
+
+	project "yasmstaticapp"
+		kind "consoleapp"
+		language "c"
+		files "main.c"
+		links "yasmstatic"
 
 		filter "action:gmake"
 			postbuildcommands { "file %{cfg.buildtarget.abspath}" }
